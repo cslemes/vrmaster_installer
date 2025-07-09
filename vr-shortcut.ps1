@@ -44,8 +44,8 @@ foreach ($app in $apps) {
 }
 
 
-
-$icoURL = "https://storage.googleapis.com/linux-pdv/gbardini/util/img/VRMaster.ico"
+$icoURL = "https://github.com/cslemes/vrmaster_installer/blob/main/VRMaster.ico"
+#$icoURL = "https://storage.googleapis.com/linux-pdv/gbardini/util/img/VRMaster.ico"
 $icoPath = [System.IO.Path]::Combine($userPath, "VRMaster.ico")
 
 Invoke-WebRequest -Uri $icoURL -OutFile $icoPath
