@@ -23,15 +23,15 @@ $apps = @(
 
 foreach ($app in $apps) {
     if ($app.server -eq $server) {
-        
-        if ($app.server -ne "8") {
-            $remoteAppParams = @(
+        $program = if ($app.server -ne "8") { "||VRMaster-Prep$($app.server)" } else { "||VRMaster" }
+
+        $remoteAppParams = @(
             "alternate full address:s:$($app.address)"
             "alternate shell:s:rdpinit.exe"
             "full address:s:$($app.address)"
             "remoteapplicationmode:i:1"
             "remoteapplicationname:s:VRMaster"
-            "remoteapplicationprogram:s:||VRMaster-Prep$($app.server)"
+            "remoteapplicationprogram:s:$program"
             "disableremoteappcapscheck:i:1"
             "drivestoredirect:s:*"
             "prompt for credentials:i:1"
@@ -39,26 +39,7 @@ foreach ($app in $apps) {
             "redirectcomports:i:1"
             "span monitors:i:1"
             "use multimon:i:1"
-            ) -join "`n"
-        } else {
-            $remoteAppParams = @(
-            "alternate full address:s:$($app.address)"
-            "alternate shell:s:rdpinit.exe"
-            "full address:s:$($app.address)"
-            "remoteapplicationmode:i:1"
-            "remoteapplicationname:s:VRMaster"
-            "remoteapplicationprogram:s:||VRMaster"
-            "disableremoteappcapscheck:i:1"
-            "drivestoredirect:s:*"
-            "prompt for credentials:i:1"
-            "promptcredentialonce:i:0"
-            "redirectcomports:i:1"
-            "span monitors:i:1"
-            "use multimon:i:1"
-            ) -join "`n"
-        }
-
-
+        ) -join "`n"
     }
 }
 
