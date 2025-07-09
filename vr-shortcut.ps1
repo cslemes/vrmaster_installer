@@ -24,7 +24,7 @@ $apps = @(
 foreach ($app in $apps) {
     if ($app.server -eq $server) {
         
-        if $app.server -ne "8" {
+        if ($app.server -ne "8") {
             $remoteAppParams = @(
             "alternate full address:s:$($app.address)"
             "alternate shell:s:rdpinit.exe"
