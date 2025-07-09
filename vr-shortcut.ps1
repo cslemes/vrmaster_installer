@@ -24,7 +24,8 @@ $apps = @(
 foreach ($app in $apps) {
     if ($app.server -eq $server) {
         
-        $remoteAppParams = @(
+        if $app.server -ne "8" {
+            $remoteAppParams = @(
             "alternate full address:s:$($app.address)"
             "alternate shell:s:rdpinit.exe"
             "full address:s:$($app.address)"
@@ -38,7 +39,24 @@ foreach ($app in $apps) {
             "redirectcomports:i:1"
             "span monitors:i:1"
             "use multimon:i:1"
-        ) -join "`n"
+            ) -join "`n"
+        } else {
+            $remoteAppParams = @(
+            "alternate full address:s:$($app.address)"
+            "alternate shell:s:rdpinit.exe"
+            "full address:s:$($app.address)"
+            "remoteapplicationmode:i:1"
+            "remoteapplicationname:s:VRMaster"
+            "remoteapplicationprogram:s:||VRMaster"
+            "disableremoteappcapscheck:i:1"
+            "drivestoredirect:s:*"
+            "prompt for credentials:i:1"
+            "promptcredentialonce:i:0"
+            "redirectcomports:i:1"
+            "span monitors:i:1"
+            "use multimon:i:1"
+            ) -join "`n"
+        }
 
 
     }
