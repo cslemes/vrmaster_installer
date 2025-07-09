@@ -17,7 +17,8 @@ $apps = @(
     @{ server = "3"; address = "10.200.101.198" },
     @{ server = "4"; address = "10.200.101.199" },
     @{ server = "5"; address = "10.200.101.200" },
-    @{ server = "6"; address = "10.200.101.201" }
+    @{ server = "6"; address = "10.200.101.201" },
+    @{ server = "8"; address = "172.29.0.10" }
 )
 
 foreach ($app in $apps) {
