@@ -44,7 +44,7 @@ foreach ($app in $apps) {
 }
 
 
-$icoURL = "https://github.com/cslemes/vrmaster_installer/blob/main/VRMaster.ico"
+$icoURL = "https://raw.githubusercontent.com/cslemes/vrmaster_installer/refs/heads/main/VRMaster.ico"
 #$icoURL = "https://storage.googleapis.com/linux-pdv/gbardini/util/img/VRMaster.ico"
 $icoPath = [System.IO.Path]::Combine($userPath, "VRMaster.ico")
 
@@ -62,6 +62,7 @@ $WshShell = New-Object -ComObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut($shortcutPath)
 $Shortcut.TargetPath = $rdpFilePath
 $Shortcut.IconLocation = $icoPath
+$Shortcut.WorkingDirectory = $userPath
 $Shortcut.Save()
 
 
