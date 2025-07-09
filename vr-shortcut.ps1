@@ -2,15 +2,24 @@ param (
     [string]$server
 )
 
-if (-not $server) {
-    $server = Read-Host "Digite o numero do servidor (ex: 1, 2, 3, 4, 5, 6, 7)"
+[int]$serverNumber = 0
+
+while ($true) {
+    $server = Read-Host "Digite o número do servidor (1-7) ou 'q' para sair"
+
+    if ($server -eq 'q') {
+        Write-Host "Saindo..."
+        exit 0
+    }
+
+    if ([int]::TryParse($server, [ref]$serverNumber) -and $serverNumber -ge 1 -and $serverNumber -le 7) {
+        break
+    } else {
+        Write-Host "Entrada inválida. Por favor, digite um número entre 1 e 7 ou 'q' para sair."
+    }
 }
 
-if (-not $server -or ($server -notmatch '^[1-7]$')) {
-    Write-Host "Uso: .\vr_install.ps1 <servidor> (ex: 1, 2, 3, 4, 5, 6, 7)"
-    exit 1
-}
-
+Write-Host "Servidor selecionado: $serverNumber"
 
 $apps = @(
     @{ server = "1"; address = "10.200.101.196" },
