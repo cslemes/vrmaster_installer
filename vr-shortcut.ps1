@@ -43,20 +43,26 @@ foreach ($app in $apps) {
     }
 }
 
+
+
+$icoURL = "https://storage.googleapis.com/linux-pdv/gbardini/util/img/VRMaster.ico"
+$icoPath = [System.IO.Path]::Combine($userPath, "VRMaster.ico")
+
+Invoke-WebRequest -Uri $icoURL -OutFile $icoPath
+
+
 $userPath = [System.Environment]::GetFolderPath('UserProfile')
-
-$shortcutPath = [System.IO.Path]::Combine($userPath, "Desktop", "VRMaster.lnk")
-
+$shortcutPath = [System.IO.Path]::Combine($userPath, "Desktop", "VRMaster (Nuvem).lnk")
 $rdpFilePath = [System.IO.Path]::Combine($userPath, "VRMaster.rdp")
+$icoPath = [System.IO.Path]::Combine($userPath, "VRMaster.ico")
 
 
 Set-Content -Path $rdpFilePath -Value $remoteAppParams
-
 $WshShell = New-Object -ComObject WScript.Shell
 $Shortcut = $WshShell.CreateShortcut($shortcutPath)
 $Shortcut.TargetPath = $rdpFilePath
+$Shortcut.IconLocation = $icoPath
 $Shortcut.Save()
 
 
-Write-Progress -Activity "Instalando aplicativos..." -Completed
-Write-Host "Todos os instaladores foram concluídos!"
+Write-Host "Atalho atualizado!"
