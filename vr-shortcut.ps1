@@ -3,13 +3,14 @@ param (
 )
 
 if (-not $server) {
-    $server = Read-Host "Digite o numero do servidor (ex: 1, 2, 3, 4, 5 ou 6)"
+    $server = Read-Host "Digite o numero do servidor (ex: 1, 2, 3, 4, 5, 6, 7)"
 }
 
-if (-not $server) {
-    Write-Host "Uso: .\vr_install.ps1 <servidor> (ex: 1, 2, 3, 4, 5 ou 6)"
+if (-not $server -or ($server -notmatch '^[1-7]$')) {
+    Write-Host "Uso: .\vr_install.ps1 <servidor> (ex: 1, 2, 3, 4, 5, 6, 7)"
     exit 1
 }
+
 
 $apps = @(
     @{ server = "1"; address = "10.200.101.196" },
@@ -18,12 +19,12 @@ $apps = @(
     @{ server = "4"; address = "10.200.101.199" },
     @{ server = "5"; address = "10.200.101.200" },
     @{ server = "6"; address = "10.200.101.201" },
-    @{ server = "8"; address = "172.29.0.10" }
+    @{ server = "7"; address = "172.29.0.10" }
 )
 
 foreach ($app in $apps) {
     if ($app.server -eq $server) {
-        $program = if ($app.server -ne "8") { "||VRMaster-Prep$($app.server)" } else { "||VRMaster" }
+        $program = if ($app.server -ne "7") { "||VRMaster-Prep$($app.server)" } else { "||VRMaster" }
 
         $remoteAppParams = @(
             "alternate full address:s:$($app.address)"
